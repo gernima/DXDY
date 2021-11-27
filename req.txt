@@ -1,2 +1,5 @@
 selenium
 fake_useragent
+secrets
+coincurve
+sha3
