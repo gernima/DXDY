@@ -79,7 +79,7 @@ def open_browser(headless, proxy, tf_prefs=False, extension=None):
 
 
 def get_driver(capabilities, options):
-    return webdriver.Chrome(executable_path="chromedriver.exe",
+    return webdriver.Chrome(executable_path="/usr/bin/chromedriver",
                             desired_capabilities=capabilities,
                             options=options)
 
