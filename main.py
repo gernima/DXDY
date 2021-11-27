@@ -1,4 +1,3 @@
-from webdriver_manager.chrome import ChromeDriverManager as CM
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
@@ -7,7 +6,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from time import sleep
-import pyautogui
 import subprocess
 from datetime import datetime, timedelta
 from fake_useragent import UserAgent
@@ -81,7 +79,7 @@ def open_browser(headless, proxy, tf_prefs=False, extension=None):
 
 
 def get_driver(capabilities, options):
-    return webdriver.Chrome(executable_path="chromedriver.exe",
+    return webdriver.Chrome(executable_path="/usr/bin/chromedriver",
                             desired_capabilities=capabilities,
                             options=options)
 
@@ -89,13 +87,13 @@ def get_driver(capabilities, options):
 ai = 0
 ri = 0
 n = 20
-while True:
+while n > 0:
     http = []
     referal_links = {}
     with open("codes.txt","r", encoding="utf-8") as f:
-        [referal_links[x] = 0 for x in f.read().strip().split("\n")] 
+        for x in f.read().strip().split("\n"):
+            referal_links[x] = 0 
     print(referal_links)
-    input("press")
     with open("http.txt","r", encoding="utf-8") as f:
         [http.append(x) for x in f.read().strip().split("\n")]
     with open("http_used.txt","r", encoding="utf-8") as f:
@@ -147,6 +145,7 @@ while True:
                 f.write(str(http_) + "\n")
             print("referal added", referal_links)
         except:
+            driver.quit()
             print("err")
     if ri >= len(list(referal_links.keys())):
         ri = 0
