@@ -78,7 +78,11 @@ def open_browser(headless, proxy, tf_prefs=False, extension=None):
     return driver
 
 
-def get_driver(capabilities, options):
+def get_driver(capabilities, options, islinux=False):
+    if islinux:
+        return webdriver.Chrome(executable_path="/usr/lib/chromium-browser/chromedriver/chromedriver",
+                            desired_capabilities=capabilities,
+                            options=options)
     return webdriver.Chrome(executable_path="chromedriver.exe",
                             desired_capabilities=capabilities,
                             options=options)
