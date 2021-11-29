@@ -79,7 +79,7 @@ def open_browser(headless, proxy, tf_prefs=False, extension=None):
 
 
 def get_driver(capabilities, options):
-    return webdriver.Chrome(executable_path="/usr/bin/chromedriver",
+    return webdriver.Chrome(executable_path="chromedriver.exe",
                             desired_capabilities=capabilities,
                             options=options)
 
@@ -87,12 +87,13 @@ def get_driver(capabilities, options):
 ai = 0
 ri = 0
 n = 20
+referal_links = {}
 while n > 0:
     http = []
-    referal_links = {}
     with open("codes.txt","r", encoding="utf-8") as f:
         for x in f.read().strip().split("\n"):
-            referal_links[x] = 0 
+            if x not in referal_links:
+                referal_links[x] = 0
     print(referal_links)
     with open("http.txt","r", encoding="utf-8") as f:
         [http.append(x) for x in f.read().strip().split("\n")]
@@ -150,6 +151,6 @@ while n > 0:
     if ri >= len(list(referal_links.keys())):
         ri = 0
         n-=1
-        sleep_time = randint(60, 100)
-        print("sleep", sleep_time)
-        sleep(sleep_time)
+        # sleep_time = randint(60, 100)
+        # print("sleep", sleep_time)
+        # sleep(sleep_time)
